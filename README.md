@@ -7,6 +7,7 @@ Esta guía te llevará desde los conceptos más básicos de SQL hasta técnicas 
 - **Junior Level**: Fundamentos básicos, consultas simples, operaciones CRUD
 - **Mid Level**: Consultas complejas, joins, subconsultas, funciones agregadas
 - **Senior Level**: Optimización, índices, transacciones, procedimientos almacenados, triggers
+- **Senior Especializado**: Plataformas musicales, microservicios, NoSQL, Machine Learning, escala global
 
 ## 📁 Estructura del Curso
 
@@ -31,6 +32,12 @@ Esta guía te llevará desde los conceptos más básicos de SQL hasta técnicas 
 - **docs/senior_4**: Optimización avanzada y análisis de consultas
 - **docs/senior_5**: Administración de bases de datos y seguridad
 
+### 🚀 Nivel Senior Especializado (Plataformas Musicales)
+- **docs/senior_6**: Bases de datos para plataformas de matching musical
+- **docs/senior_7**: Microservicios y bases de datos distribuidas
+- **docs/senior_8**: Bases de datos NoSQL y alto rendimiento
+- **docs/senior_9**: Machine Learning y optimización para escala global
+
 ## 🛠️ Requisitos Previos
 - Ningún conocimiento previo de SQL requerido
 - Computadora con acceso a internet
@@ -45,6 +52,20 @@ Esta guía te llevará desde los conceptos más básicos de SQL hasta técnicas 
 
 ## 🎉 ¡Comencemos!
 Dirígete a `docs/junior_1` para comenzar tu viaje en SQL.
+
+---
+
+## 🚀 **¡CURSO EXPANDIDO PARA PLATAFORMAS MUSICALES!**
+
+Este curso ha sido **especialmente diseñado** para que puedas construir plataformas como **MussikOn** desde cero. Al completarlo, serás un **experto en bases de datos para plataformas musicales** con capacidades de:
+
+- **Arquitectura de microservicios** con bases de datos distribuidas
+- **Sistemas de matching musical** con algoritmos avanzados
+- **Bases de datos NoSQL** para alto rendimiento
+- **Machine Learning** en bases de datos musicales
+- **Escalabilidad global** para millones de usuarios
+
+**¡Tu viaje hacia la maestría en bases de datos musicales comienza aquí! 🎵🚀**
 
 ---
 
