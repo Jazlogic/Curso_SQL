@@ -1,4 +1,11 @@
-# 🎯 Senior 4: Optimización Avanzada y Análisis de Consultas
+# 🎯 Senior Level 4: Optimización Avanzada y Análisis de Consultas
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 3: Triggers y Eventos](../senior_3/README.md)  
+**Siguiente →**: [Senior Level 5: Administración y Seguridad](../senior_5/README.md)
+
+---
 
 ## 📖 Teoría
 

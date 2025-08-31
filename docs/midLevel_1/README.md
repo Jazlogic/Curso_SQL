@@ -1,4 +1,11 @@
-# 🔶 Mid-Level 1: JOINs y Relaciones entre Tablas
+# 🔶 Mid Level 1: JOINs y Relaciones entre Tablas
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Junior Level 5: Funciones Básicas](../junior_5/README.md)  
+**Siguiente →**: [Mid Level 2: Subconsultas](../midLevel_2/README.md)
+
+---
 
 ## 📖 Teoría
 

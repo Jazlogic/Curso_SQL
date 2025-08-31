@@ -1,4 +1,11 @@
-# 🎯 Senior 2: Procedimientos Almacenados y Funciones
+# 🎯 Senior Level 2: Procedimientos Almacenados y Funciones
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 1: Transacciones](../senior_1/README.md)  
+**Siguiente →**: [Senior Level 3: Triggers y Eventos](../senior_3/README.md)
+
+---
 
 ## 📖 Teoría
 

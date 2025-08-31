@@ -1,4 +1,11 @@
-# 🔶 Mid-Level 3: Funciones Agregadas y GROUP BY
+# 🔶 Mid Level 3: Funciones Agregadas y GROUP BY
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Mid Level 2: Subconsultas](../midLevel_2/README.md)  
+**Siguiente →**: [Mid Level 4: Consultas Complejas](../midLevel_4/README.md)
+
+---
 
 ## 📖 Teoría
 

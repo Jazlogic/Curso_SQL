@@ -1,4 +1,11 @@
-# 🚀 Senior Level 7: Microservicios y Bases de Datos Distribuidas para Plataformas Musicales
+# 🚀 Senior Level 7: Microservicios y Bases de Datos Distribuidas
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 6: Plataformas Musicales](../senior_6/README.md)  
+**Siguiente →**: [Senior Level 8: NoSQL y Alto Rendimiento](../senior_8/README.md)
+
+---
 
 ## 📖 Teoría
 

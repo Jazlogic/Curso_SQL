@@ -192,4 +192,11 @@ Una vez que hayas completado todos los ejercicios de esta sección, continúa co
 
 ---
 
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Inicio del Curso](../README.md)  
+**Siguiente →**: [Junior Level 2: Consultas SELECT](../junior_2/README.md)
+
+---
+
 **💡 Consejo: Practica creando diferentes bases de datos y tablas para familiarizarte con la sintaxis. ¡La práctica es la clave del aprendizaje!**

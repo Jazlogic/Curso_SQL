@@ -1,4 +1,11 @@
-# 🔶 Mid-Level 4: Consultas Complejas y Optimización Básica
+# 🔶 Mid Level 4: Consultas Complejas y Optimización Básica
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Mid Level 3: Funciones Agregadas](../midLevel_3/README.md)  
+**Siguiente →**: [Mid Level 5: Vistas e Índices](../midLevel_5/README.md)
+
+---
 
 ## 📖 Teoría
 

@@ -1,4 +1,11 @@
-# 🔰 Junior Level 3: Filtros Avanzados y Ordenamiento
+# 🔰 Junior Level 3: Filtros y Ordenamiento
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Junior Level 2: Consultas SELECT](../junior_2/README.md)  
+**Siguiente →**: [Junior Level 4: Operaciones CRUD](../junior_4/README.md)
+
+---
 
 ## 📖 Teoría
 

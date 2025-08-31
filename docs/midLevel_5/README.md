@@ -1,4 +1,11 @@
-# 🔶 Mid-Level 5: Vistas e Índices
+# 🔶 Mid Level 5: Vistas e Índices
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Mid Level 4: Consultas Complejas](../midLevel_4/README.md)  
+**Siguiente →**: [Senior Level 1: Transacciones](../senior_1/README.md)
+
+---
 
 ## 📖 Teoría
 

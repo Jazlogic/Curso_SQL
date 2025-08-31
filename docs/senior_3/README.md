@@ -1,4 +1,11 @@
-# 🎯 Senior 3: Triggers y Eventos
+# 🎯 Senior Level 3: Triggers y Eventos
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 2: Procedimientos Almacenados](../senior_2/README.md)  
+**Siguiente →**: [Senior Level 4: Optimización Avanzada](../senior_4/README.md)
+
+---
 
 ## 📖 Teoría
 

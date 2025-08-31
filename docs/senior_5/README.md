@@ -1,4 +1,11 @@
-# 🎯 Senior 5: Administración de Bases de Datos y Seguridad
+# 🎯 Senior Level 5: Administración de Bases de Datos y Seguridad
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 4: Optimización Avanzada](../senior_4/README.md)  
+**Siguiente →**: [Senior Level 6: Plataformas Musicales](../senior_6/README.md)
+
+---
 
 ## 📖 Teoría
 

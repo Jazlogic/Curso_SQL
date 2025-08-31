@@ -1,4 +1,11 @@
-# 🚀 Senior Level 8: Bases de Datos NoSQL y Arquitectura de Alto Rendimiento para Plataformas Musicales
+# 🚀 Senior Level 8: Bases de Datos NoSQL y Alto Rendimiento
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 7: Microservicios](../senior_7/README.md)  
+**Siguiente →**: [Senior Level 9: Machine Learning](../senior_9/README.md)
+
+---
 
 ## 📖 Teoría
 

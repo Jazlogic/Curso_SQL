@@ -1,4 +1,11 @@
-# 🎯 Senior 1: Transacciones y Control de Concurrencia
+# 🎯 Senior Level 1: Transacciones y Control de Concurrencia
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Mid Level 5: Vistas e Índices](../midLevel_5/README.md)  
+**Siguiente →**: [Senior Level 2: Procedimientos Almacenados](../senior_2/README.md)
+
+---
 
 ## 📖 Teoría
 

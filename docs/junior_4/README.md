@@ -1,4 +1,11 @@
-# 🔰 Junior Level 4: Operaciones INSERT, UPDATE y DELETE
+# 🔰 Junior Level 4: Operaciones INSERT, UPDATE, DELETE
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Junior Level 3: Filtros y Ordenamiento](../junior_3/README.md)  
+**Siguiente →**: [Junior Level 5: Funciones Básicas](../junior_5/README.md)
+
+---
 
 ## 📖 Teoría
 

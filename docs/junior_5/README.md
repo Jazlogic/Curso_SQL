@@ -1,5 +1,12 @@
 # 🔰 Junior Level 5: Funciones Básicas de SQL
 
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Junior Level 4: Operaciones CRUD](../junior_4/README.md)  
+**Siguiente →**: [Mid Level 1: JOINs y Relaciones](../midLevel_1/README.md)
+
+---
+
 ## 📖 Teoría
 
 ### ¿Qué son las Funciones SQL?

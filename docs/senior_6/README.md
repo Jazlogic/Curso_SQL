@@ -1,3 +1,12 @@
+# 🚀 Senior Level 6: Bases de Datos para Plataformas de Matching Musical
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 5: Administración y Seguridad](../senior_5/README.md)  
+**Siguiente →**: [Senior Level 7: Microservicios](../senior_7/README.md)
+
+---
+
 # 🎵 Senior Level 6: Bases de Datos para Plataformas de Matching Musical
 
 ## 📖 Teoría

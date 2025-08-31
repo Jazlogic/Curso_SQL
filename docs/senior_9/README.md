@@ -1,5 +1,12 @@
 # 🚀 Senior Level 9: Machine Learning y Optimización para Escala Global en Plataformas Musicales
 
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Senior Level 8: NoSQL y Alto Rendimiento](../senior_8/README.md)  
+**Siguiente →**: [Final del Curso](../README.md)
+
+---
+
 ## 📖 Teoría
 
 ### Machine Learning en Bases de Datos Musicales

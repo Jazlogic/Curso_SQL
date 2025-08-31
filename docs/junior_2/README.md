@@ -1,5 +1,12 @@
 # 🔰 Junior Level 2: Consultas SELECT Básicas
 
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Junior Level 1: Introducción a SQL](../junior_1/README.md)  
+**Siguiente →**: [Junior Level 3: Filtros y Ordenamiento](../junior_3/README.md)
+
+---
+
 ## 📖 Teoría
 
 ### ¿Qué es SELECT?

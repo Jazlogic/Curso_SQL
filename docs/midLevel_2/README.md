@@ -1,4 +1,11 @@
-# 🔶 Mid-Level 2: Subconsultas y Consultas Anidadas
+# 🔶 Mid Level 2: Subconsultas y Consultas Anidadas
+
+## 🧭 Navegación del Curso
+
+**← Anterior**: [Mid Level 1: JOINs y Relaciones](../midLevel_1/README.md)  
+**Siguiente →**: [Mid Level 3: Funciones Agregadas](../midLevel_3/README.md)
+
+---
 
 ## 📖 Teoría
 
