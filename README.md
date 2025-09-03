@@ -117,3 +117,4 @@ Este curso ha sido **especialmente diseñado** para que puedas construir platafo
 ---
 
 **¡Recuerda: La práctica hace al maestro! Dedica tiempo a cada ejercicio y no dudes en repetir conceptos que no entiendas completamente.**
+

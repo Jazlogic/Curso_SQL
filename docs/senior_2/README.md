@@ -633,3 +633,5 @@ Continúa con `docs/senior_3` para aprender sobre triggers y eventos.
 ---
 
 **💡 Consejo: Practica creando procedimientos y funciones que resuelvan problemas reales de negocio. Son herramientas poderosas para la lógica de aplicación.**
+
+

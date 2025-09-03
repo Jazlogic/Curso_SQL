@@ -594,3 +594,5 @@ Continúa con `docs/senior_5` para aprender sobre administración de bases de da
 ---
 
 **💡 Consejo: Practica analizando planes de ejecución con EXPLAIN y experimentando con diferentes estructuras de índices. La optimización requiere práctica y experiencia.**
+
+

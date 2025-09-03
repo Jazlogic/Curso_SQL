@@ -882,3 +882,5 @@ FROM (
 ---
 
 **💡 Consejo: Practica creando vistas para consultas complejas frecuentes e índices para columnas de búsqueda. Son herramientas esenciales para bases de datos profesionales.**
+
+

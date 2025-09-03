@@ -1,11 +1,4 @@
-# 🔶 Mid Level 4: Consultas Complejas y Optimización Básica
-
-## 🧭 Navegación del Curso
-
-**← Anterior**: [Mid Level 3: Funciones Agregadas](../midLevel_3/README.md)  
-**Siguiente →**: [Mid Level 5: Vistas e Índices](../midLevel_5/README.md)
-
----
+# 🔶 Mid-Level 4: Consultas Complejas y Optimización Básica
 
 ## 📖 Teoría
 
@@ -770,3 +763,5 @@ Una vez que hayas completado todos los ejercicios de esta sección, continúa co
 ---
 
 **💡 Consejo: Practica creando consultas complejas que combinen múltiples conceptos. Son la base para reportes empresariales avanzados y análisis de datos complejos.**
+
+

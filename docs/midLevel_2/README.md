@@ -1,504 +1,327 @@
-# 🔶 Mid Level 2: Subconsultas y Consultas Anidadas
+# 🔶 Mid Level 2: Administración y Mantenimiento de Bases de Datos
 
 ## 🧭 Navegación del Curso
 
-**← Anterior**: [Mid Level 1: JOINs y Relaciones](../midLevel_1/README.md)  
+**← Anterior**: [Mid Level 1: Consultas Avanzadas y Optimización](../midLevel_1/README.md)  
 **Siguiente →**: [Mid Level 3: Funciones Agregadas](../midLevel_3/README.md)
 
 ---
 
 ## 📖 Teoría
 
-### ¿Qué son las Subconsultas?
-Las subconsultas son consultas SQL que se ejecutan dentro de otra consulta principal. Permiten crear consultas más complejas y potentes al combinar múltiples operaciones en una sola instrucción.
+### ¿Qué es la Administración de Bases de Datos?
+La administración de bases de datos es el proceso de gestionar, mantener y optimizar sistemas de bases de datos para garantizar su disponibilidad, rendimiento y seguridad. Incluye tareas como backup, recuperación, monitoreo, mantenimiento y gestión de usuarios.
 
-### Tipos de Subconsultas
-1. **Subconsultas Escalares**: Retornan un solo valor
-2. **Subconsultas de Columna**: Retornan una columna de valores
-3. **Subconsultas de Tabla**: Retornan múltiples filas y columnas
-4. **Subconsultas Correlacionadas**: Se ejecutan para cada fila de la consulta principal
+### Áreas de Administración
+1. **Seguridad**: Autenticación, autorización, encriptación
+2. **Backup y Recuperación**: Estrategias de respaldo y restauración
+3. **Replicación**: Sincronización de datos entre servidores
+4. **Clustering**: Agrupación de servidores para alta disponibilidad
+5. **Monitoreo**: Supervisión de rendimiento y alertas
+6. **Mantenimiento**: Optimización y limpieza de bases de datos
+7. **Migración**: Transferencia de datos entre sistemas
+8. **Disaster Recovery**: Planes de recuperación ante desastres
 
-### Ubicaciones de Subconsultas
-- **SELECT**: En la lista de columnas
-- **FROM**: Como tabla derivada
-- **WHERE**: En condiciones de filtrado
-- **HAVING**: En filtros de grupos
-- **INSERT/UPDATE**: En operaciones de modificación
-
-### Operadores para Subconsultas
-- **IN**: Verifica si un valor está en una lista
-- **EXISTS**: Verifica si existe al menos una fila
-- **NOT EXISTS**: Verifica si no existe ninguna fila
-- **ANY/ALL**: Compara con todos o algunos valores
+### Herramientas de Administración
+- **MySQL**: MySQL Workbench, mysqladmin, mysqldump
+- **PostgreSQL**: pgAdmin, pg_dump, pg_restore
+- **SQL Server**: SQL Server Management Studio, SQL Server Agent
+- **Oracle**: Oracle Enterprise Manager, RMAN
 
 ## 💡 Ejemplos Prácticos
 
-### Ejemplo 1: Subconsulta Escalar en SELECT
+### Ejemplo 1: Gestión de Usuarios
 ```sql
--- Mostrar productos con precio mayor al promedio
-SELECT 
-    nombre, 
-    precio,
-    (SELECT AVG(precio) FROM productos) AS precio_promedio
-FROM productos 
-WHERE precio > (SELECT AVG(precio) FROM productos);
+-- Crear usuario con permisos específicos
+CREATE USER 'analista'@'localhost' IDENTIFIED BY 'password123';
+GRANT SELECT, INSERT ON tienda_online.* TO 'analista'@'localhost';
+GRANT UPDATE ON tienda_online.productos TO 'analista'@'localhost';
+FLUSH PRIVILEGES;
 ```
 
-### Ejemplo 2: Subconsulta en WHERE con IN
+### Ejemplo 2: Backup de Base de Datos
 ```sql
--- Productos de categorías con más de 5 productos
-SELECT nombre, precio, categoria_id
-FROM productos 
-WHERE categoria_id IN (
-    SELECT id 
-    FROM categorias 
-    WHERE (SELECT COUNT(*) FROM productos p WHERE p.categoria_id = categorias.id) > 5
-);
+-- Backup completo de base de datos
+mysqldump -u root -p --single-transaction --routines --triggers tienda_online > backup_tienda_$(date +%Y%m%d).sql
+
+-- Backup de tablas específicas
+mysqldump -u root -p tienda_online productos categorias > backup_productos.sql
 ```
 
-### Ejemplo 3: Subconsulta Correlacionada
+### Ejemplo 3: Monitoreo de Rendimiento
 ```sql
--- Productos con precio mayor al promedio de su categoría
-SELECT p.nombre, p.precio, p.categoria_id
-FROM productos p
-WHERE p.precio > (
-    SELECT AVG(precio) 
-    FROM productos 
-    WHERE categoria_id = p.categoria_id
-);
+-- Verificar procesos activos
+SHOW PROCESSLIST;
+
+-- Analizar consultas lentas
+SHOW VARIABLES LIKE 'slow_query_log';
+SHOW VARIABLES LIKE 'long_query_time';
+
+-- Verificar uso de índices
+SHOW INDEX FROM productos;
+EXPLAIN SELECT * FROM productos WHERE categoria_id = 1;
 ```
 
-### Ejemplo 4: Subconsulta en FROM
+### Ejemplo 4: Mantenimiento de Tablas
 ```sql
--- Top 3 categorías por número de productos
-SELECT 
-    c.nombre,
-    COUNT(p.id) AS total_productos
-FROM categorias c
-INNER JOIN (
-    SELECT categoria_id, COUNT(*) as total
-    FROM productos 
-    GROUP BY categoria_id
-    ORDER BY total DESC
-    LIMIT 3
-) top_cat ON c.id = top_cat.categoria_id
-INNER JOIN productos p ON c.id = p.categoria_id
-GROUP BY c.id, c.nombre;
+-- Optimizar tabla
+OPTIMIZE TABLE productos;
+
+-- Analizar tabla para estadísticas
+ANALYZE TABLE productos;
+
+-- Verificar integridad de tabla
+CHECK TABLE productos;
+REPAIR TABLE productos;
 ```
 
-### Ejemplo 5: Subconsulta con EXISTS
+### Ejemplo 5: Configuración de Replicación
 ```sql
--- Clientes que han realizado pedidos en el último mes
-SELECT nombre, apellido, email
-FROM clientes c
-WHERE EXISTS (
-    SELECT 1 
-    FROM pedidos p 
-    WHERE p.cliente_id = c.id 
-    AND p.fecha_pedido >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
-);
+-- Configurar servidor maestro
+CHANGE MASTER TO
+    MASTER_HOST='192.168.1.100',
+    MASTER_USER='replicador',
+    MASTER_PASSWORD='replica123',
+    MASTER_LOG_FILE='mysql-bin.000001',
+    MASTER_LOG_POS=154;
+
+-- Iniciar replicación
+START SLAVE;
+
+-- Verificar estado de replicación
+SHOW SLAVE STATUS\G
 ```
 
 ## 🎯 Ejercicios
 
-### Ejercicio 1: Sistema de Tienda Online
-Usando la base de datos `tienda_online`, escribe consultas con subconsultas para:
+### Ejercicio 1: Sistema de Seguridad
+Implementa un sistema de seguridad completo para la base de datos `tienda_online`:
 
-1. Mostrar productos con precio mayor al promedio de su categoría
-2. Encontrar clientes que han comprado productos de todas las categorías disponibles
-3. Mostrar categorías que tienen al menos un producto con stock mayor a 50
-4. Encontrar el producto más vendido de cada categoría
-5. Mostrar clientes que han gastado más que el promedio de todos los clientes
+1. Crear usuarios con diferentes niveles de acceso
+2. Configurar roles y permisos granulares
+3. Implementar auditoría de accesos
+4. Configurar encriptación de datos sensibles
+5. Establecer políticas de contraseñas
 
 **Solución:**
 ```sql
--- 1. Productos con precio mayor al promedio de su categoría
-SELECT p.nombre, p.precio, c.nombre AS categoria
-FROM productos p
-INNER JOIN categorias c ON p.categoria_id = c.id
-WHERE p.precio > (
-    SELECT AVG(precio) 
-    FROM productos 
-    WHERE categoria_id = p.categoria_id
+-- 1. Crear usuarios con diferentes niveles
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'AdminPass123!';
+CREATE USER 'vendedor'@'localhost' IDENTIFIED BY 'VendedorPass123!';
+CREATE USER 'cliente'@'localhost' IDENTIFIED BY 'ClientePass123!';
+
+-- 2. Configurar roles
+CREATE ROLE 'administrador';
+CREATE ROLE 'vendedor_role';
+CREATE ROLE 'cliente_role';
+
+-- Asignar permisos a roles
+GRANT ALL PRIVILEGES ON tienda_online.* TO 'administrador';
+GRANT SELECT, INSERT, UPDATE ON tienda_online.productos TO 'vendedor_role';
+GRANT SELECT ON tienda_online.productos TO 'cliente_role';
+
+-- Asignar roles a usuarios
+GRANT 'administrador' TO 'admin'@'localhost';
+GRANT 'vendedor_role' TO 'vendedor'@'localhost';
+GRANT 'cliente_role' TO 'cliente'@'localhost';
+
+-- 3. Configurar auditoría
+CREATE TABLE audit_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50),
+    accion VARCHAR(100),
+    tabla VARCHAR(50),
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Clientes que han comprado de todas las categorías
-SELECT c.nombre, c.apellido
-FROM clientes c
-WHERE (
-    SELECT COUNT(DISTINCT pr.categoria_id)
-    FROM pedidos p
-    INNER JOIN productos_pedido pp ON p.id = pp.pedido_id
-    INNER JOIN productos pr ON pp.producto_id = pr.id
-    WHERE p.cliente_id = c.id
-) = (SELECT COUNT(*) FROM categorias);
+-- 4. Encriptar datos sensibles
+ALTER TABLE clientes MODIFY COLUMN telefono VARBINARY(255);
+UPDATE clientes SET telefono = AES_ENCRYPT(telefono, 'clave_secreta');
 
--- 3. Categorías con productos de stock alto
-SELECT DISTINCT c.nombre
-FROM categorias c
-WHERE EXISTS (
-    SELECT 1 
-    FROM productos p 
-    WHERE p.categoria_id = c.id 
-    AND p.stock > 50
-);
-
--- 4. Producto más vendido por categoría
-SELECT 
-    c.nombre AS categoria,
-    p.nombre AS producto_mas_vendido,
-    total_vendido
-FROM categorias c
-INNER JOIN (
-    SELECT 
-        p.categoria_id,
-        p.nombre,
-        SUM(pp.cantidad) AS total_vendido,
-        ROW_NUMBER() OVER (PARTITION BY p.categoria_id ORDER BY SUM(pp.cantidad) DESC) AS rn
-    FROM productos p
-    LEFT JOIN productos_pedido pp ON p.id = pp.producto_id
-    GROUP BY p.id, p.categoria_id, p.nombre
-) ranked ON c.id = ranked.categoria_id
-WHERE ranked.rn = 1;
-
--- 5. Clientes que gastan más que el promedio
-SELECT c.nombre, c.apellido, SUM(p.total) AS total_gastado
-FROM clientes c
-INNER JOIN pedidos p ON c.id = p.cliente_id
-WHERE p.estado = 'Completado'
-GROUP BY c.id, c.nombre, c.apellido
-HAVING SUM(p.total) > (
-    SELECT AVG(total_cliente)
-    FROM (
-        SELECT SUM(total) AS total_cliente
-        FROM pedidos 
-        WHERE estado = 'Completado'
-        GROUP BY cliente_id
-    ) promedios
-);
+-- 5. Políticas de contraseñas
+SET GLOBAL validate_password.policy = STRONG;
+SET GLOBAL validate_password.length = 12;
 ```
 
-### Ejercicio 2: Sistema de Biblioteca
-Usando la base de datos `biblioteca_completa`, escribe consultas con subconsultas para:
+### Ejercicio 2: Sistema de Backup
+Implementa un sistema de backup automatizado para la base de datos `biblioteca_completa`:
 
-1. Mostrar libros que han sido prestados más veces que el promedio
-2. Encontrar usuarios que han prestado libros de todos los géneros disponibles
-3. Mostrar autores que tienen libros con más de 3 préstamos
-4. Encontrar el libro más popular de cada género
-5. Mostrar usuarios que han prestado más libros que el promedio
+1. Crear script de backup completo
+2. Implementar backup incremental
+3. Configurar rotación de backups
+4. Crear script de restauración
+5. Implementar verificación de integridad
 
 **Solución:**
 ```sql
--- 1. Libros prestados más que el promedio
-SELECT l.titulo, COUNT(p.id) AS veces_prestado
-FROM libros l
-LEFT JOIN prestamos p ON l.id = p.libro_id
-GROUP BY l.id, l.titulo
-HAVING COUNT(p.id) > (
-    SELECT AVG(veces_prestado)
-    FROM (
-        SELECT COUNT(*) AS veces_prestado
-        FROM prestamos
-        GROUP BY libro_id
-    ) promedios
-);
+-- 1. Script de backup completo
+#!/bin/bash
+DATE=$(date +%Y%m%d_%H%M%S)
+BACKUP_DIR="/backups/biblioteca"
+DB_NAME="biblioteca_completa"
 
--- 2. Usuarios que han prestado de todos los géneros
-SELECT u.nombre, u.apellido
-FROM usuarios u
-WHERE (
-    SELECT COUNT(DISTINCT l.genero)
-    FROM prestamos p
-    INNER JOIN libros l ON p.libro_id = l.id
-    WHERE p.usuario_id = u.id
-) = (SELECT COUNT(DISTINCT genero) FROM libros);
+# Crear directorio si no existe
+mkdir -p $BACKUP_DIR
 
--- 3. Autores con libros muy prestados
-SELECT DISTINCT CONCAT(a.nombre, ' ', a.apellido) AS autor
-FROM autores a
-WHERE EXISTS (
-    SELECT 1 
-    FROM libros l 
-    WHERE l.autor_id = a.id 
-    AND (SELECT COUNT(*) FROM prestamos WHERE libro_id = l.id) > 3
-);
+# Backup completo
+mysqldump -u root -p --single-transaction --routines --triggers \
+    --master-data=2 $DB_NAME > $BACKUP_DIR/backup_completo_$DATE.sql
 
--- 4. Libro más popular por género
-SELECT 
-    genero,
-    titulo AS libro_mas_popular,
-    veces_prestado
-FROM (
-    SELECT 
-        l.genero,
-        l.titulo,
-        COUNT(p.id) AS veces_prestado,
-        ROW_NUMBER() OVER (PARTITION BY l.genero ORDER BY COUNT(p.id) DESC) AS rn
-    FROM libros l
-    LEFT JOIN prestamos p ON l.id = p.libro_id
-    GROUP BY l.id, l.genero, l.titulo
-) ranked
-WHERE rn = 1;
+# 2. Backup incremental
+mysqlbinlog --start-datetime="2024-01-01 00:00:00" \
+    --stop-datetime="2024-01-02 00:00:00" \
+    mysql-bin.000001 > $BACKUP_DIR/incremental_$DATE.sql
 
--- 5. Usuarios que prestan más que el promedio
-SELECT u.nombre, u.apellido, COUNT(p.id) AS total_prestamos
-FROM usuarios u
-LEFT JOIN prestamos p ON u.id = p.usuario_id
-GROUP BY u.id, u.nombre, u.apellido
-HAVING COUNT(p.id) > (
-    SELECT AVG(total_usuario)
-    FROM (
-        SELECT COUNT(*) AS total_usuario
-        FROM prestamos
-        GROUP BY usuario_id
-    ) promedios
-);
+# 3. Rotación de backups (mantener últimos 30 días)
+find $BACKUP_DIR -name "backup_*.sql" -mtime +30 -delete
+
+# 4. Script de restauración
+mysql -u root -p $DB_NAME < $BACKUP_DIR/backup_completo_$DATE.sql
+
+# 5. Verificación de integridad
+mysqlcheck -u root -p --check --all-databases
 ```
 
-### Ejercicio 3: Sistema de Escuela
-Usando la base de datos `escuela_completa`, escribe consultas con subconsultas para:
+### Ejercicio 3: Sistema de Monitoreo
+Implementa un sistema de monitoreo para la base de datos `escuela_completa`:
 
-1. Mostrar cursos con calificación promedio mayor al promedio general
-2. Encontrar estudiantes que están inscritos en más cursos que el promedio
-3. Mostrar profesores que enseñan cursos con calificación promedio alta
-4. Encontrar el curso más difícil (menor calificación promedio) de cada profesor
-5. Mostrar estudiantes que tienen calificaciones superiores al promedio de su grado
+1. Configurar logs de consultas lentas
+2. Implementar monitoreo de conexiones
+3. Crear alertas de espacio en disco
+4. Configurar monitoreo de rendimiento
+5. Implementar dashboard de métricas
 
 **Solución:**
 ```sql
--- 1. Cursos con calificación alta
-SELECT c.nombre, AVG(i.calificacion) AS promedio_curso
-FROM cursos c
-INNER JOIN inscripciones i ON c.id = i.curso_id
-GROUP BY c.id, c.nombre
-HAVING AVG(i.calificacion) > (
-    SELECT AVG(calificacion) FROM inscripciones
+-- 1. Configurar logs de consultas lentas
+SET GLOBAL slow_query_log = 'ON';
+SET GLOBAL long_query_time = 2;
+SET GLOBAL slow_query_log_file = '/var/log/mysql/slow.log';
+
+-- 2. Monitoreo de conexiones
+CREATE TABLE connection_monitor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50),
+    host VARCHAR(100),
+    comando VARCHAR(20),
+    tiempo TIME,
+    estado VARCHAR(20),
+    info TEXT,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Estudiantes con muchos cursos
-SELECT e.nombre, e.apellido, COUNT(i.curso_id) AS total_cursos
-FROM estudiantes e
-LEFT JOIN inscripciones i ON e.id = i.estudiante_id
-GROUP BY e.id, e.nombre, e.apellido
-HAVING COUNT(i.curso_id) > (
-    SELECT AVG(total_estudiante)
-    FROM (
-        SELECT COUNT(*) AS total_estudiante
-        FROM inscripciones
-        GROUP BY estudiante_id
-    ) promedios
-);
-
--- 3. Profesores con cursos de alta calificación
-SELECT DISTINCT CONCAT(p.nombre, ' ', p.apellido) AS profesor
-FROM profesores p
-WHERE EXISTS (
-    SELECT 1 
-    FROM cursos c 
-    WHERE c.profesor_id = p.id 
-    AND (
-        SELECT AVG(calificacion) 
-        FROM inscripciones 
-        WHERE curso_id = c.id
-    ) > (SELECT AVG(calificacion) FROM inscripciones)
-);
-
--- 4. Curso más difícil por profesor
+-- 3. Alertas de espacio en disco
 SELECT 
-    CONCAT(p.nombre, ' ', p.apellido) AS profesor,
-    c.nombre AS curso_mas_dificil,
-    promedio_curso
-FROM profesores p
-INNER JOIN (
-    SELECT 
-        c.profesor_id,
-        c.nombre,
-        AVG(i.calificacion) AS promedio_curso,
-        ROW_NUMBER() OVER (PARTITION BY c.profesor_id ORDER BY AVG(i.calificacion)) AS rn
-    FROM cursos c
-    INNER JOIN inscripciones i ON c.id = i.curso_id
-    GROUP BY c.id, c.profesor_id, c.nombre
-) ranked ON p.id = ranked.profesor_id
-WHERE ranked.rn = 1;
+    table_schema AS 'Base de Datos',
+    ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS 'Tamaño (MB)'
+FROM information_schema.tables
+WHERE table_schema = 'escuela_completa'
+GROUP BY table_schema;
 
--- 5. Estudiantes con calificaciones superiores al promedio de su grado
-SELECT e.nombre, e.apellido, e.grado, AVG(i.calificacion) AS promedio_estudiante
-FROM estudiantes e
-INNER JOIN inscripciones i ON e.id = i.estudiante_id
-GROUP BY e.id, e.nombre, e.apellido, e.grado
-HAVING AVG(i.calificacion) > (
-    SELECT AVG(calificacion)
-    FROM inscripciones i2
-    INNER JOIN estudiantes e2 ON i2.estudiante_id = e2.id
-    WHERE e2.grado = e.grado
-);
+-- 4. Monitoreo de rendimiento
+SHOW GLOBAL STATUS LIKE 'Questions';
+SHOW GLOBAL STATUS LIKE 'Uptime';
+SHOW GLOBAL STATUS LIKE 'Threads_connected';
+
+-- 5. Dashboard de métricas
+CREATE VIEW performance_dashboard AS
+SELECT 
+    'Conexiones Activas' AS metric,
+    VARIABLE_VALUE AS value
+FROM information_schema.GLOBAL_STATUS 
+WHERE VARIABLE_NAME = 'Threads_connected'
+UNION ALL
+SELECT 
+    'Consultas por Segundo' AS metric,
+    ROUND(VARIABLE_VALUE / (SELECT VARIABLE_VALUE FROM information_schema.GLOBAL_STATUS WHERE VARIABLE_NAME = 'Uptime'), 2) AS value
+FROM information_schema.GLOBAL_STATUS 
+WHERE VARIABLE_NAME = 'Questions';
 ```
 
-### Ejercicio 4: Sistema de Restaurante
-Usando la base de datos `restaurante_completo`, escribe consultas con subconsultas para:
+### Ejercicio 4: Sistema de Mantenimiento
+Implementa un sistema de mantenimiento automatizado para la base de datos `restaurante_completo`:
 
-1. Mostrar platos con precio mayor al promedio de su categoría
-2. Encontrar mesas que han generado más pedidos que el promedio
-3. Mostrar categorías que tienen platos con descripción muy larga
-4. Encontrar el plato más caro de cada categoría
-5. Mostrar mesas que han tenido pedidos con total superior al promedio
+1. Crear script de limpieza de logs
+2. Implementar optimización de tablas
+3. Configurar limpieza de datos obsoletos
+4. Crear script de actualización de estadísticas
+5. Implementar verificación de integridad
 
 **Solución:**
 ```sql
--- 1. Platos con precio alto por categoría
-SELECT p.nombre, p.precio, c.nombre AS categoria
-FROM platos p
-INNER JOIN categorias_platos c ON p.categoria_id = c.id
-WHERE p.precio > (
-    SELECT AVG(precio) 
-    FROM platos 
-    WHERE categoria_id = p.categoria_id
-);
+-- 1. Limpieza de logs
+DELETE FROM audit_log WHERE fecha < DATE_SUB(NOW(), INTERVAL 90 DAY);
+DELETE FROM error_log WHERE fecha < DATE_SUB(NOW(), INTERVAL 30 DAY);
 
--- 2. Mesas con muchos pedidos
-SELECT m.numero, COUNT(p.id) AS total_pedidos
-FROM mesas m
-LEFT JOIN pedidos p ON m.id = p.mesa_id
-GROUP BY m.id, m.numero
-HAVING COUNT(p.id) > (
-    SELECT AVG(total_mesa)
-    FROM (
-        SELECT COUNT(*) AS total_mesa
-        FROM pedidos
-        GROUP BY mesa_id
-    ) promedios
-);
+-- 2. Optimización de tablas
+OPTIMIZE TABLE mesas, platos, pedidos, categorias_platos;
 
--- 3. Categorías con platos de descripción larga
-SELECT DISTINCT c.nombre
-FROM categorias_platos c
-WHERE EXISTS (
-    SELECT 1 
-    FROM platos p 
-    WHERE p.categoria_id = c.id 
-    AND LENGTH(p.descripcion) > 100
-);
+-- 3. Limpieza de datos obsoletos
+DELETE FROM pedidos WHERE fecha_pedido < DATE_SUB(NOW(), INTERVAL 2 YEAR) AND estado = 'Cancelado';
+DELETE FROM productos_pedido WHERE pedido_id NOT IN (SELECT id FROM pedidos);
 
--- 4. Plato más caro por categoría
-SELECT 
-    c.nombre AS categoria,
-    p.nombre AS plato_mas_caro,
-    p.precio
-FROM categorias_platos c
-INNER JOIN (
-    SELECT 
-        categoria_id,
-        nombre,
-        precio,
-        ROW_NUMBER() OVER (PARTITION BY categoria_id ORDER BY precio DESC) AS rn
-    FROM platos
-) ranked ON c.id = ranked.categoria_id
-WHERE ranked.rn = 1;
+-- 4. Actualización de estadísticas
+ANALYZE TABLE mesas, platos, pedidos, categorias_platos;
 
--- 5. Mesas con pedidos de alto valor
-SELECT DISTINCT m.numero
-FROM mesas m
-WHERE EXISTS (
-    SELECT 1 
-    FROM pedidos p 
-    WHERE p.mesa_id = m.id 
-    AND p.total > (SELECT AVG(total) FROM pedidos)
-);
+-- 5. Verificación de integridad
+CHECK TABLE mesas, platos, pedidos, categorias_platos;
+REPAIR TABLE mesas, platos, pedidos, categorias_platos;
 ```
 
-### Ejercicio 5: Sistema de Hospital
-Usando la base de datos `hospital_completo`, escribe consultas con subconsultas para:
+### Ejercicio 5: Sistema de Disaster Recovery
+Implementa un sistema de disaster recovery para la base de datos `hospital_completo`:
 
-1. Mostrar doctores que tienen más citas que el promedio
-2. Encontrar pacientes que han tenido citas con todos los doctores
-3. Mostrar especialidades que tienen doctores con muchas citas
-4. Encontrar el tratamiento más costoso aplicado por cada doctor
-5. Mostrar pacientes que han gastado más en tratamientos que el promedio
+1. Crear plan de recuperación ante desastres
+2. Implementar replicación en tiempo real
+3. Configurar failover automático
+4. Crear script de recuperación de emergencia
+5. Implementar verificación de consistencia
 
 **Solución:**
 ```sql
--- 1. Doctores con muchas citas
-SELECT d.nombre, d.apellido, COUNT(c.id) AS total_citas
-FROM doctores d
-LEFT JOIN citas c ON d.id = c.doctor_id
-GROUP BY d.id, d.nombre, d.apellido
-HAVING COUNT(c.id) > (
-    SELECT AVG(total_doctor)
-    FROM (
-        SELECT COUNT(*) AS total_doctor
-        FROM citas
-        GROUP BY doctor_id
-    ) promedios
-);
+-- 1. Plan de recuperación ante desastres
+-- Configurar replicación maestro-esclavo
+CHANGE MASTER TO
+    MASTER_HOST='192.168.1.100',
+    MASTER_USER='replicador',
+    MASTER_PASSWORD='replica123',
+    MASTER_LOG_FILE='mysql-bin.000001',
+    MASTER_LOG_POS=154;
 
--- 2. Pacientes con citas de todos los doctores
-SELECT p.nombre, p.apellido
-FROM pacientes p
-WHERE (
-    SELECT COUNT(DISTINCT c.doctor_id)
-    FROM citas c
-    WHERE c.paciente_id = p.id
-) = (SELECT COUNT(*) FROM doctores);
+-- 2. Replicación en tiempo real
+START SLAVE;
+SHOW SLAVE STATUS\G
 
--- 3. Especialidades con doctores ocupados
-SELECT DISTINCT d.especialidad
-FROM doctores d
-WHERE EXISTS (
-    SELECT 1 
-    FROM citas c 
-    WHERE c.doctor_id = d.id 
-    AND (SELECT COUNT(*) FROM citas WHERE doctor_id = d.id) > 5
-);
+-- 3. Failover automático
+-- Script de monitoreo del maestro
+#!/bin/bash
+if ! mysqladmin ping -h 192.168.1.100 -u root -p --silent; then
+    # Promover esclavo a maestro
+    STOP SLAVE;
+    RESET MASTER;
+    # Notificar a aplicaciones
+fi
 
--- 4. Tratamiento más costoso por doctor
-SELECT 
-    CONCAT(d.nombre, ' ', d.apellido) AS doctor,
-    t.nombre AS tratamiento_mas_caro,
-    t.costo
-FROM doctores d
-INNER JOIN (
-    SELECT 
-        c.doctor_id,
-        t.nombre,
-        t.costo,
-        ROW_NUMBER() OVER (PARTITION BY c.doctor_id ORDER BY t.costo DESC) AS rn
-    FROM citas c
-    INNER JOIN tratamientos_aplicados ta ON c.id = ta.cita_id
-    INNER JOIN tratamientos t ON ta.tratamiento_id = t.id
-) ranked ON d.id = ranked.doctor_id
-WHERE ranked.rn = 1;
+-- 4. Recuperación de emergencia
+-- Restaurar desde backup más reciente
+mysql -u root -p hospital_completo < backup_emergencia.sql
 
--- 5. Pacientes con gastos altos
-SELECT p.nombre, p.apellido, SUM(t.costo) AS total_gastado
-FROM pacientes p
-INNER JOIN citas c ON p.id = c.paciente_id
-INNER JOIN tratamientos_aplicados ta ON c.id = ta.cita_id
-INNER JOIN tratamientos t ON ta.tratamiento_id = t.id
-GROUP BY p.id, p.nombre, p.apellido
-HAVING SUM(t.costo) > (
-    SELECT AVG(total_paciente)
-    FROM (
-        SELECT SUM(t2.costo) AS total_paciente
-        FROM citas c2
-        INNER JOIN tratamientos_aplicados ta2 ON c2.id = ta2.cita_id
-        INNER JOIN tratamientos t2 ON ta2.tratamiento_id = t2.id
-        GROUP BY c2.paciente_id
-    ) promedios
-);
+-- 5. Verificación de consistencia
+CHECKSUM TABLE doctores, pacientes, citas, tratamientos;
 ```
 
 ## 📝 Resumen de Conceptos Clave
-- ✅ Las subconsultas permiten crear consultas complejas y anidadas
-- ✅ Las subconsultas escalares retornan un solo valor
-- ✅ Las subconsultas correlacionadas se ejecutan para cada fila
-- ✅ EXISTS verifica la existencia de filas
-- ✅ IN verifica si un valor está en una lista
-- ✅ Las subconsultas se pueden usar en SELECT, FROM, WHERE, HAVING
-- ✅ Las subconsultas son fundamentales para consultas avanzadas
+- ✅ La administración de bases de datos es fundamental para la operación
+- ✅ La seguridad incluye autenticación, autorización y encriptación
+- ✅ Los backups son esenciales para la protección de datos
+- ✅ El monitoreo permite detectar problemas proactivamente
+- ✅ El mantenimiento mantiene el rendimiento óptimo
+- ✅ La replicación proporciona alta disponibilidad
+- ✅ El disaster recovery garantiza la continuidad del negocio
 
 ## 🔗 Próximo Nivel
 Una vez que hayas completado todos los ejercicios de esta sección, continúa con `docs/midLevel_3` para aprender sobre funciones agregadas y GROUP BY.
 
 ---
 
-**💡 Consejo: Practica creando subconsultas complejas. Son la base para consultas empresariales avanzadas y reportes complejos.**
+**💡 Consejo: La administración de bases de datos es una habilidad crítica. Practica con diferentes escenarios y herramientas para desarrollar experiencia real.**

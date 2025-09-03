@@ -493,3 +493,5 @@ Una vez que hayas completado todos los ejercicios de esta sección, continúa co
 ---
 
 **💡 Consejo: Practica creando reportes agregados complejos. Las funciones agregadas son la base para análisis empresarial y toma de decisiones.**
+
+

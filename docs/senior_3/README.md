@@ -624,3 +624,5 @@ Continúa con `docs/senior_4` para aprender sobre optimización avanzada y anál
 ---
 
 **💡 Consejo: Practica implementando triggers para casos de uso reales como auditoría, validación y sincronización. Son herramientas poderosas para automatización.**
+
+

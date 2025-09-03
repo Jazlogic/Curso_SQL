@@ -408,3 +408,5 @@ Continúa con `docs/senior_2` para aprender sobre procedimientos almacenados y f
 ---
 
 **💡 Consejo: Practica implementando transacciones complejas y manejando casos de error. Son fundamentales para sistemas de producción robustos.**
+
+
