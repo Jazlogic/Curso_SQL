@@ -59,13 +59,10 @@ select
     from empleados;
 
 
-    select 
-        case when estado then 
-            'Bloqueado'
-        else
-            'Activo'
-        end as "Estado del empleado"
-    from empleados;
+select 
+    nombres as "Nombre",
+    apellidos as "Apellidos",
+    extract
 
 
      
